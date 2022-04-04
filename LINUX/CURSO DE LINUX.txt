@@ -1,5 +1,33 @@
 CURSO DE LINUX
 
+1- Instalar Linux 
+
+    - Maquina virtual
+    - Con Windows
+
+2- OS para aprender
+3- Terminal
+
+    Los Binarios.
+
+        ls 
+
+    Entorno bash 
+
+        usuario@nombredelapc:~$ // ~ siginifica que trabaja en el direcotorio personal , $ siginifica que es un usuario sin privilegios. 
+
+        usuario@nombredelapc:~$ pwd
+        /home/alumno
+        
+        usuario@nombredelapc:~$ ls 
+        Documents Desktop Downloads 
+        Pictures Music 
+
+        usuario@nombredelapc:~$ cd 
+
+        
+       
+        
 
 Mi curso de linux 
 
