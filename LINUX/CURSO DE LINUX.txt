@@ -1,8 +1,176 @@
 CURSO DE LINUX
 
 
+Mi curso de linux 
+
+    Desde ls hasta scripting
+
+•	cat 
+cat /etc/passwd
+cat /etc/passwd | grep "sh$"
+•	ID
+•	Whoami
+•	Mkdir
+•	Useradd
+useradd -d /home/pepito -s /bin/bash pepito
+•	ls -l 
+•	passwd pepito
+•	chown pepito pepito 
+''' asignarle el directorio pepito al usuario pepito'''
+•	chgroup pepito pepito 
+''' asignarle el grupo pepito al usuario pepito'''
+•	Permisos
+https://blog.desdelinux.net/permisos-basicos-en-gnulinux-con-chmod/  
+ls -l 
+d > directory 
+r > read 
+w > write
+x > Si es fichero (capacidad de ejecución) | si se aplica al directorio( Es accesible con CD).
+
+chmod o+w directorio     '''dar permisos a otros de escritura.''' 
+chmod o-w directorio    '''quitar permisos a otros de escritura.'''
+chmod g+w directorio ''permisos al grupo''
+chmod g-w,o+w directorio  ''' El grupo no tiene permisos de escritura. pero otros si lo tiene'''
+
+-	Permisos del propietario: 
+sobre su carpeta home. 
+-	Permisos del grupo: 
+Asignar permisos a todos los que pertenece al grupo. 
+•	Permisos de otros: 
+Asignar permisos a otros que no pertenece al grupo.
+•	Resultado de ls -l 
+Permisos | hard links | Propietario | Grupo | size | fecha de modificación | Nombre del archivo
+
+•	La mascara 
+
+Permiso 				Identifica
+-						Archivo
+d						Directorio
+b 						Archivo de bloques especiales (Archivos especiales de dispositivos)
+c 						Archivo de caracteres especiales (Dispositivo tty, impresora)
+l 						Archivo de vinculo o enlace (soft/symbolic link)
+p 						Archivo especial de cauce
+
+
+- Cada 3 caracteres se le conoce los permisos que se le conceden:
+
+Permiso					Identifica
+
+-						Sin permiso
+r 						permiso de lectura
+w 						Permiso de escritura
+x 						Permiso de ejecución
+
+•	Permisos para archivos
+
+<° Lectura: permite, fundamentalmente, visualizar el contenido del archivo.
+<° Escritura: permite modificar el contenido del archivo.
+<° Ejecución: permite ejecutar el archivo como si de un programa ejecutable se tratase.
+
+•	Permisos para directorios
+
+<° Lectura: Permite saber qué archivos y directorios contiene el directorio que tiene este permiso.
+<° Escritura: permite crear archivos en el directorio, bien sean archivos ordinarios o nuevos directorios.
+ Se pueden borrar directorios, copiar archivos en el directorio, mover, cambiar el nombre, etc.
+<° Ejecución: permite situarse sobre el directorio para poder examinar su contenido, copiar archivos de o hacia él.
+ Si además se dispone de los permisos de escritura y lectura, se podrán realizar todas las operaciones posibles sobre archivos y directorios.
 
 
 
 
 
+Tipo Permiso Usuario Grupo Usuario Otros 
+
+- 	      rw			r--			r--
+
+Tipo archivo
+El usuario puede: Leer y Escribir
+El grupo al que pertenece puede: Leer
+otros: Puede leer 
+
+- chmod (change mod)
+Permite modificar la máscara.
+Sobre archivos y directorios.
+Si no se especifica usuario, los cambios aplicara a todos los usuarios. 
+
+Parámetros 	               Nivel 		Descripción
+
+u 			dueño		Dueño de directorio o archivo.
+
+g 			Grupo 		Grupo al que pertenece el archivo.
+
+o 			otros		todos los demás usuarios que no son el dueño y no pertenece al grupo
+
+
+
+
+
+
+
+•	Dar permiso de ejecución al dueño:
+
+$ chmod u+x komodo.sh
+
+•	Quitar permiso de ejecución a todos los usuarios:
+
+$ chmod -x komodo.sh
+
+•	Dar permiso de lectura y escritura a los demás usuarios:
+$ chmod o+r+w komodo.sh
+•	Dejar solo permiso de lectura al grupo al que pertenece el archivo:
+$ chmod g+r-w-x komodo.sh
+
+•	Permisos en formato numérico octal
+
+el bit x es 20 es 1
+el bit w es 21 es 2 
+el bit r es 22 es 4 
+
+r= 4
+w= 2
+x= 1
+
+•	Combinación de bits encendidos y apagados
+
+Permiso 	valor octal 	Descripción
+
+---			0			No tiene permiso. 
+
+--x  			1			Solo permiso de ejecución
+
+-w- 			2			Solo permiso de escritura
+
+-wx 			3 			Permiso de escritura y de ejecución
+
+r --			4 			Solo permiso de lectura
+
+r-x 			5 			Permiso de lectura y ejecución 
+
+rw--			6 			permiso de lectura y escritura
+
+rwx		              7			todos los permisos establecidos, lectura, escritura y ejecución
+
+Cuando se combina los permisos de usuarios, grupo y otros. Se obtiene un numero de tres cifras que conforman los permisos
+del archivo o del directorio. 
+
+Ejemplos:
+
+rw- --- ---	 600 El propietario tiene permiso de lectura y escritura
+rwx --x --x 	711	El propietario lectura, escritura y ejecución, el grupo y otro solo de ejecución
+rwx r-x r-x 755 	El propietario lectura, escritura y ejecución, el grupo y otro solo pueden leer y ejecutar
+rwx rwx rwx 777 El archivo puede ser leído, escrito y ejecutado por cualquiera. 
+r-- --- --- 400 	Solo el propietario puede leer el archivo, pero ni él puede modificarlo o ejecutarlo.
+rw- r-- --- 640	 El propietario puede leer y escribir, el grupo puede solo leer y otros no pueden hacer nada.
+
+•	Agregar grupo
+groupadd Colegio 
+cat /etc/group | tail -n 1 ''' Ver la última linea'''
+chgrp Colegio directorio ''' el grupo se llama colegio y quiero asignar al fichero directorio'''
+usermod -a -G Colegio jromero '''Asignar al grupo colegio el usuario jromero '''
+id jromero 
+1002(Colegio)
+chmod g-rw directorio ''' Quitar los permisos al grupo de lectura y escritura'''
+ls 
+ls -l 
+•	touch direcotorio/fichero
+echo "Hola que tal " > directorio/fichero.txt
